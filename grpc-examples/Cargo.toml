@@ -1,0 +1,52 @@
+[package]
+name = "grpc-examples"
+version = "0.0.0"
+authors = ["friddle@qq.com"]
+publish = false
+edition = "2018"
+
+[lib]
+doctest = false
+test = false
+
+
+[dependencies]
+protobuf = "2.14.0"
+protoc-rust        = "2.14.0"
+grpc-protobuf  =  {version="0.8.0"}
+bytes           = "0.5.6"
+futures         = "0.3.*"
+tls-api            = "0.4.*"
+tls-api-native-tls = "0.4.*"
+httpbis         = "0.9"
+grpc = "0.8.0"
+protoc-rust-grpc = "0.8.0"
+env_logger      = "~0.5"
+rand = "0.5.5"
+json = "0.11.15"
+
+
+
+
+[build-dependencies]
+protoc-rust-grpc = "0.8.0"
+
+
+
+[[bin]]
+name = "greeter_client"
+test = false
+
+[[bin]]
+name = "greeter_server"
+test = false
+
+[[bin]]
+name = "route_guide_client"
+test = false
+
+[[bin]]
+name = "route_guide_server"
+test = false
+
+

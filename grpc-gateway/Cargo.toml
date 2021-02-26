@@ -1,0 +1,37 @@
+[package]
+name = "grpc-gateway"
+version = "0.1.0"
+authors = ["friddle <friddle@qq.com>"]
+license = "MIT/Apache-2.0"
+description = "Rust Gateway of gRPC"
+readme = "README.md"
+keywords = ["grpc"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+log             = "0.4"
+log-ndc         = "0.2.*"
+futures         = "0.3.*"
+tokio           = { version = "~0.2.6", features = ["net", "uds", "io-util", "time"] }
+#httpbis         = "~0.9"
+httpbis         = { git = "https://github.com/friddle/rust-http2" }
+tls-api         = "0.4.*"
+tls-api-stub    = "0.4.*"
+tls-api-native-tls = "0.4.*"
+bytes           = "0.5.*"
+base64          = "0.9"
+uuid = { version = "0.8", features = ["serde", "v4"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_yaml = "0.8"
+regex="1.4"
+env_logger      = "0.4.*"
+
+[dev-dependencies]
+log-ndc-env-logger = "~0.2"
+
+[lib]
+doctest = false
+
+
+

@@ -1,0 +1,50 @@
+#[derive(Debug)]
+pub struct Client {
+    client: ::std::sync::Arc<httpbis::Client>,
+    host: String,
+    http_scheme: HttpScheme,
+    port: Option<u16>,
+    id: String
+}
+
+
+impl Client{
+    pub fn call_impl(&self,
+                     path:&str,
+                     meta:&Metadata,
+                     req_stream:RouterReqStream,
+                     server_rsp:RouterRspBox
+    )
+                     ->Pin<Box<
+                         dyn Future<Output = crate::Result<(RouterReqHandler, RouterRspHandler)>> + Send
+                     >>
+    {
+        let mut headers = Headers::from_vec(vec![
+            Header::new(Bytes::from_static(b":method"), Bytes::from_static(b"POST")),
+// TODO: do not allocate static
+            Header::new(Bytes::from_static(b":authority"), self.host.clone()),
+            Header::new(Bytes::from_static(b":path"), path.to_owned().clone()),
+            Header::new(
+                Bytes::from_static(b":scheme"),
+                Bytes::from_static(self.http_scheme.as_bytes()),
+            ),
+            Header::new(
+                Bytes::from_static(b"content-type"),
+                Bytes::from_static(b"application/grpc"),
+            ),
+            Header::new(Bytes::from_static(b"te"), Bytes::from_static(b"trailers")),
+        ]);
+        headers.extend(meta.clone().into_headers());
+
+        let http_future=self.client.start_request(headers,None,None,false);
+        let http_future=TryFutureExt::map_err(http_future,crate::error::Error::from);
+
+        return Box::pin(TryFutureExt::map_ok(http_future,move |(req,rsp)|{
+            (RouterReqHandler{
+                client_req:req,
+                req_stream
+            },RouterRspHandler::new(server_rsp,rsp))
+        }));
+    }
+
+}

@@ -1,0 +1,22 @@
+ listen:
+       port: 50051
+       auth: none
+ proxys:
+     -
+       name: helloworld
+       methods:
+         - /helloword*
+       nodes:
+         -
+           host: localhost
+           port: 50051
+           auth: none
+     -
+       name: round_chat
+       methods:
+         - /round*
+       nodes:
+         -
+           host: localhost
+           port: 50053
+           auth: none

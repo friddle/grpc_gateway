@@ -1,0 +1,25 @@
+ listen:
+       port: 50051
+       auth: ssl
+       auth_option:
+         - auth_file: "../grpc-examples/src/foobar.com.p12"
+         - authorized: "appapi.qiuqiuhuiben.com"
+ proxys:
+     -
+       name: helloworld
+       methods:
+         - /helloword*
+       nodes:
+         -
+           host: localhost
+           port: 50052
+           auth: none
+     -
+       name: round_chat
+       methods:
+         - /round*
+       nodes:
+         -
+           host: localhost
+           port: 50053
+           auth: none

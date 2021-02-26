@@ -1,0 +1,35 @@
+[package]
+name = "gateway-examples"
+version = "0.0.0"
+authors = ["friddle@qq.com"]
+publish = false
+edition = "2018"
+
+[lib]
+doctest = false
+test = false
+
+
+[dependencies]
+bytes           = "0.5.6"
+futures         = "0.3.*"
+tls-api            = "0.4.*"
+tls-api-native-tls = "0.4.*"
+httpbis         = "0.9"
+strfmt = "0.1.6"
+json = "0.11.15"
+
+[dependencies.grpc-gateway]
+path = "../grpc-gateway"
+
+
+[[bin]]
+name = "starter_sample"
+test = false
+path = 'src/bin/starter_sample.rs'
+
+[[bin]]
+name = "starter_sample_tls"
+test = false
+path = 'src/bin/starter_sample_tls.rs'
+
