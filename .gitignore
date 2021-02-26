@@ -1,0 +1,9 @@
+.idea/
+.vscode/
+target/
+*.log
+*.pem
+*.p12
+gateway-qiuqiu/
+./Cargo.toml
+./update.sh
