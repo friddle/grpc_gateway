@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "grpc-gateway",
+    "grpc-examples",
+    "gateway-examples"
+]
