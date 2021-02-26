@@ -7,3 +7,4 @@ target/
 gateway-qiuqiu/
 ./Cargo.toml
 ./update.sh
+Cargo.lock

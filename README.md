@@ -1,6 +1,6 @@
 Grpc-GateWay
 ========
-
+[中文文档](./README_ZH.md)
 Grpc Gateway impelement for Rust.choose backend node by method and metadata
 And provider some function for gateway
 
@@ -9,7 +9,7 @@ fork project [grpc-rust](https://github.com/stepancheg/grpc-rust)。
 Because my code has too many Unnecessary commits.So will clean up the commits. Start with the full version  
 Because I am not good at rust. There are very much incorrect rust usage. if find and fix.
 
-## 当前状态
+## Current Status
 *.  Https is unavailable. It's an upstream code problem. Ready to help  with upstream code sometime  
 *.  LoadBalance has not been implemented yet  
 *.  using it in my test server for now. Ready to use it in production next phase.   
@@ -28,7 +28,7 @@ Because I am not good at rust. There are very much incorrect rust usage. if find
 ### Basic Usage  
 
   
-guide code:[gateway-examples/src/bin/start_sample](/gateway-examples/src/bin/start_sample)
+guide code:[gateway-examples/src/bin/starter_sample](/gateway-examples/src/bin/starter_sample.rs)
 ```
 fn main()
 {
@@ -49,7 +49,7 @@ fn main()
 
 
 ### Use yml to start server
-Guide [gateway-examples/src/bin/start_yml](/gateway-examples/src/bin/start_yml)
+Guide [gateway-examples/src/bin/start_yml](/gateway-examples/src/bin/starter_yml.rs)
 
 
 ```

@@ -1,5 +1,6 @@
 use bytes::Bytes;
 use futures::channel::mpsc;
+use crate::{Headers,Header,ConnectInfo};
 
 //TODO:所有请求变成两个请求。且不要update
 //TODO:执行Log并且执行
@@ -33,12 +34,7 @@ pub struct LogConnectData{
 //最后一步是new thread.run
 
 pub struct LogInterceptorImpl{
-    pub logInterceptors:Vec<LogInterceptor>,
     pub connectInfo:LogConnectData
-}
-
-impl Interceptor for LogInterceptorImpl{
-
 }
 
 
