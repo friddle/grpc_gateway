@@ -19,7 +19,7 @@ httpbis         = { git = "https://github.com/friddle/rust-http2" }
 tls-api         = "0.4.*"
 tls-api-stub    = "0.4.*"
 tls-api-native-tls = "0.4.*"
-bytes           = "0.5.*"
+bytes           = "0.5.6"
 base64          = "0.9"
 uuid = { version = "0.8", features = ["serde", "v4"] }
 serde = { version = "1.0", features = ["derive"] }

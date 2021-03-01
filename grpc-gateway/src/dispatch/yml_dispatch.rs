@@ -1,6 +1,6 @@
 use serde::{Serialize, Deserialize};
 use serde_yaml;
-use crate::{GrpcDispatchHandler, LoadBalanceType, Headers, Header, Metadata, NodeConfs, NodeConf, ServerBuilder, Server};
+use crate::{GrpcDispatchHandler, LoadBalanceType, Headers, Header, Metadata, NodeConfs, NodeConf, ServerBuilder, Server, ServerConf};
 use std::collections::HashMap;
 use crate::common::node_conf::Tls;
 use httpbis::ClientTlsOption;
@@ -59,7 +59,8 @@ pub struct DispatchNode{
 pub struct DispatchListen{
     pub port:u16,
     pub auth:SSlAuthType,
-    pub auth_option:Option<DispatchAuthOption>
+    pub auth_option:Option<DispatchAuthOption>,
+    pub option:Option<DispatchOption>
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize,Clone)]
@@ -198,6 +199,8 @@ impl <T:Server>DispatchYamlStarter<T>{
             ),
             _=>panic!("unsupport auth type")
         };
+        let server_conf=ServerConf::new();
+        server_builder=server_builder.set_conf(server_conf);
         server_builder=server_builder.set_port(listener.port);
         for proxy in self.yaml.proxys.iter(){
             server_builder=server_builder.add_dispatch(Arc::new(Box::new(proxy.clone())));

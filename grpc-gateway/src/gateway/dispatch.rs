@@ -126,6 +126,14 @@ impl<T: GateWayTypes> DispatchCore<T>
         }
         (path, metadata)
     }
+    pub fn interceptor_error(interceptors: &Vec<Arc<InterceptorBox>>, mut error:crate::Error)->crate::Error
+    {
+        for interceptor in interceptors{
+            error=interceptor.comming_error(error);
+        }
+        error
+    }
+
 
     fn get_interceptors(interceptors: &Vec<Arc<InterceptorBox>>) -> Vec<Arc<InterceptorBox>>
     {
@@ -147,7 +155,7 @@ impl<T: GateWayTypes> DispatchCore<T>
         let nodeResult=self.pick_node(&path,&metadata,&context);
         let node=match nodeResult{
             Err(error)=>{
-                income_node.send_error(error);
+                income_node.send_error(Self::interceptor_error(&Self::get_interceptors(&self.interceptors),crate::Error::from(error)));
                 return Ok(());
             }
             Ok(node)=>node
@@ -167,8 +175,8 @@ impl<T: GateWayTypes> DispatchCore<T>
     pub async fn execute_box(path: String,
                              metadata: Metadata,
                              node: Arc<T::GateWayNode>,
-                             income_stream: T::GateWayIncomeStream,
-                             income_node: T::GateWayIncomeNode,
+                             mut income_stream: T::GateWayIncomeStream,
+                             mut income_node: T::GateWayIncomeNode,
                              interceptors: Vec<Arc<InterceptorBox>>,
     ) -> crate::Result<()>
     {
@@ -176,7 +184,13 @@ impl<T: GateWayTypes> DispatchCore<T>
         let pub_value = ConnectInfo::default();
         let (path, metadata) = Self::interceptor_path_metadata(&interceptors, path, metadata,pub_value.clone());
         let client_result = node.poll_fn(path, metadata).await;
-        let (outcome_stream, outcome_node) = client_result?;
+        let (outcome_stream, outcome_node)=match client_result{
+            Ok((outcome_stream,outcome_node))=>(outcome_stream,outcome_node),
+            Err(error)=>{
+                income_node.send_error(Self::interceptor_error(&Self::get_interceptors(&interceptors),crate::Error::from(error)));
+                return Err(crate::Error::GateWayError("not connect to backend".to_string()));
+            }
+        };
         let req =
             RouterIncome::new(
                 outcome_node,

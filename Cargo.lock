@@ -270,6 +270,7 @@ dependencies = [
  "grpc-gateway",
  "httpbis 0.9.1",
  "json",
+ "protobuf",
  "strfmt",
  "tls-api",
  "tls-api-native-tls",
