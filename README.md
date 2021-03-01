@@ -84,8 +84,8 @@ TODO
 
 ## TodoList:
 *.   Fix Https  
-*.   Add LogInterceptor implement
-*.   Fix Bytes from 0.5 to 1.0
-*.   Add pressure test code
+*.   Add LogInterceptor implement  
+*.   Fix Bytes from 0.5 to 1.0  
+*.   Add pressure test code  
 *.   Add balance implemention  
-*.   Add Redis/Web System to Manage
+*.   Add Redis/Web System to Manage  
