@@ -3,6 +3,7 @@
 target/
 *.log
 *.pem
+*.der
 *.p12
 gateway-qiuqiu/
 ./Cargo.toml

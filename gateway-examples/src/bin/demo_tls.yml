@@ -1,9 +1,9 @@
  listen:
-       port: 50051
+       port: 5001
        auth: ssl
        auth_option:
-         - auth_file: "../grpc-examples/src/foobar.com.p12"
-         - authorized: "appapi.qiuqiuhuiben.com"
+          auth_file: "../grpc-examples/src/foobar.com.p12"
+          pass: "mypassmypass"
  proxys:
      -
        name: helloworld
@@ -12,14 +12,20 @@
        nodes:
          -
            host: localhost
-           port: 50052
-           auth: none
+           port: 5002
+           auth: ssl
+           auth_option:
+             auth_file: "../grpc-examples/src/root-ca.der"
+             authorized: "foobar.com"
      -
        name: round_chat
        methods:
-         - /round*
+         - /routeguide*
        nodes:
          -
            host: localhost
-           port: 50053
-           auth: none
+           port: 5003
+           auth: ssl
+           auth_option:
+             auth_file: "../grpc-examples/src/root-ca.der"
+             authorized: "foobar.com"

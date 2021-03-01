@@ -11,15 +11,23 @@ use crate::gateway::gateway_struct::gateway_types::GateWayTypes;
 use crate::gateway::httpbis_impl::httpbis_struct_types::HttpbisTypes;
 use crate::interceptor::low_level_log::*;
 use crate::interceptor::LogInterceptor;
+use env_logger;
+use log::{warn,info,debug};
 
 /// gRPC http2_common configuration.
 #[derive(Default, Debug, Clone)]
-pub struct ServerConf {}
+pub struct ServerConf {
+    pub log_level:String,
+    pub httpbis_log_level:String,
+}
 
 impl ServerConf {
     /// Default configuration.
     pub fn new() -> ServerConf {
-        Default::default()
+        ServerConf{
+            log_level:"info".to_string(),
+            httpbis_log_level:"error".to_string()
+        }
     }
 }
 
@@ -72,7 +80,7 @@ impl<tls: tls_api::TlsAcceptor> ServerBuilder<tls> {
     }
 
     pub fn set_port(mut self, port: u16) -> Self {
-        self.set_addr(format!("0.0.0.0:{}", port))
+        self.set_addr(format!(":::{}", port))
     }
 
     pub fn set_tls(mut self, acceptor: tls) -> Self {
@@ -99,10 +107,20 @@ impl<tls: tls_api::TlsAcceptor> ServerBuilder<tls> {
         self
     }
 
+    fn _init_log(&self){
+        let env = env_logger::Env::default()
+            .filter_or("MY_LOG_LEVEL",
+                       format!("grpc_gateway={},httpbis={}",&self.conf.log_level,&self.conf.httpbis_log_level)
+            );
+        env_logger::init_from_env(env);
+        info!("logging init");
+    }
+
     pub fn build<S: Server>(self) -> Result<S, Error> {
         if self.dispatches.is_empty() {
             return Err(Error::Panic(String::from("dispatch should not be empty")));
         }
+        self._init_log();
         let core: Arc<DispatchCore<S::Types>> = Arc::new(
             DispatchCore::new(self.dispatches, self.interceptors));
         let addr =

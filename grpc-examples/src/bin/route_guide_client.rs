@@ -28,11 +28,11 @@ fn main() {
     let port = DEFAULT_CALL_PORT;
 
     let tls=isClientTls;
-    let client =match tls{
-        true=>{
+    let client =
+        if !tls{
            RouteGuideClient::new_plain("127.0.0.1", port, ClientConf::new()).expect("client")
-        },
-        false=>{
+        }
+        else{
             let tls_option =
                 httpbis::ClientTlsOption::Tls("foobar.com".to_owned(), Arc::new(test_tls_connector()));
             let grpc_client = Arc::new(
@@ -42,8 +42,7 @@ fn main() {
                     .unwrap(),
             );
             RouteGuideClient::with_client(grpc_client)
-        }
-    };
+        };
     println!("port {} tls {}",port,tls);
     executor::block_on(async { run_client(&client).await });
 }

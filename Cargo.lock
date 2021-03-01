@@ -2,15 +2,6 @@
 # It is not intended for manual editing.
 [[package]]
 name = "aho-corasick"
-version = "0.6.10"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "81ce3d38065e618af2d7b77e10c5ad9a069859b4be3c2250f674af3840d9c8a5"
-dependencies = [
- "memchr",
-]
-
-[[package]]
-name = "aho-corasick"
 version = "0.7.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7404febffaa47dac81aa44dba71523c9d069b1bdc50a77db41195149e17f68e5"
@@ -114,24 +105,27 @@ checksum = "88d7ed2934d741c6b37e33e3832298e8850b53fd2d2bea03873375596c7cea4e"
 
 [[package]]
 name = "env_logger"
-version = "0.4.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3ddf21e73e016298f5cb37d6ef8e8da8e39f91f9ec8b0df44b7deb16a9f8cd5b"
-dependencies = [
- "log 0.3.9",
- "regex 0.2.11",
-]
-
-[[package]]
-name = "env_logger"
 version = "0.5.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "15b0a4d2e39f8420210be8b27eeda28029729e2fd4291019455016c348240c38"
 dependencies = [
  "atty",
- "humantime",
- "log 0.4.14",
- "regex 1.4.3",
+ "humantime 1.3.0",
+ "log",
+ "regex",
+ "termcolor",
+]
+
+[[package]]
+name = "env_logger"
+version = "0.8.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "17392a012ea30ef05a610aa97dfb49496e71c9f676b27879922ea5bdf60d9d3f"
+dependencies = [
+ "atty",
+ "humantime 2.1.0",
+ "log",
+ "regex",
  "termcolor",
 ]
 
@@ -302,7 +296,7 @@ dependencies = [
  "bytes",
  "futures",
  "httpbis 0.9.1",
- "log 0.4.14",
+ "log",
  "log-ndc",
  "tls-api",
  "tls-api-stub",
@@ -344,13 +338,13 @@ version = "0.1.0"
 dependencies = [
  "base64",
  "bytes",
- "env_logger 0.4.3",
+ "env_logger 0.8.3",
  "futures",
  "httpbis 0.10.0-pre",
- "log 0.4.14",
+ "log",
  "log-ndc",
  "log-ndc-env-logger",
- "regex 1.4.3",
+ "regex",
  "serde",
  "serde_yaml",
  "tls-api",
@@ -388,7 +382,7 @@ checksum = "3d3e4404f8f87938a2db89336609bde64363f5a556b15af936343e7252c9648d"
 dependencies = [
  "bytes",
  "futures",
- "log 0.4.14",
+ "log",
  "log-ndc",
  "net2",
  "rand 0.5.6",
@@ -406,7 +400,7 @@ source = "git+https://github.com/friddle/rust-http2#9aa7af85e51f214dfbf782348ee4
 dependencies = [
  "bytes",
  "futures",
- "log 0.4.14",
+ "log",
  "log-ndc",
  "net2",
  "rand 0.5.6",
@@ -424,6 +418,12 @@ checksum = "df004cfca50ef23c36850aaaa59ad52cc70d0e90243c3c7737a4dd32dc7a3c4f"
 dependencies = [
  "quick-error",
 ]
+
+[[package]]
+name = "humantime"
+version = "2.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9a3a5bfb195931eeb336b2a7b4d761daec841b97f947d34394601737a7bba5e4"
 
 [[package]]
 name = "iovec"
@@ -470,15 +470,6 @@ checksum = "7fb9b38af92608140b86b693604b9ffcc5824240a484d1ecd4795bacb2fe88f3"
 
 [[package]]
 name = "log"
-version = "0.3.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e19e8d5c34a3e0e2223db8e060f9e8264aeeb5c5fc64a4ee9965c062211c024b"
-dependencies = [
- "log 0.4.14",
-]
-
-[[package]]
-name = "log"
 version = "0.4.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "51b9bbe6c47d51fc3e1a9b945965946b4c44142ab8792c50835a980d362c2710"
@@ -492,7 +483,7 @@ version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "edb09057c7b58b7d27498b528eaee9a1e661b2974a733fcabbbc3350360bc8bd"
 dependencies = [
- "log 0.4.14",
+ "log",
 ]
 
 [[package]]
@@ -502,7 +493,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "952e971e0748b242363a1f369b83e3fc5c168f56f90c0ad9e7c2472a8eb8fe4c"
 dependencies = [
  "env_logger 0.5.13",
- "log 0.4.14",
+ "log",
  "log-ndc",
 ]
 
@@ -524,7 +515,7 @@ dependencies = [
  "iovec",
  "kernel32-sys",
  "libc",
- "log 0.4.14",
+ "log",
  "miow",
  "net2",
  "slab",
@@ -562,7 +553,7 @@ checksum = "b8d96b2e1c8da3957d58100b09f102c6d9cfdfced01b7ec5a8974044bb09dbd4"
 dependencies = [
  "lazy_static",
  "libc",
- "log 0.4.14",
+ "log",
  "openssl",
  "openssl-probe",
  "openssl-sys",
@@ -697,7 +688,7 @@ version = "2.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "349d80967ee438cd03ccd236d548d4dcd5f2d9349acda206bef1490a826165d3"
 dependencies = [
- "log 0.4.14",
+ "log",
 ]
 
 [[package]]
@@ -841,36 +832,14 @@ dependencies = [
 
 [[package]]
 name = "regex"
-version = "0.2.11"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9329abc99e39129fcceabd24cf5d85b4671ef7c29c50e972bc5afe32438ec384"
-dependencies = [
- "aho-corasick 0.6.10",
- "memchr",
- "regex-syntax 0.5.6",
- "thread_local 0.3.6",
- "utf8-ranges",
-]
-
-[[package]]
-name = "regex"
 version = "1.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d9251239e129e16308e70d853559389de218ac275b515068abc96829d05b948a"
 dependencies = [
- "aho-corasick 0.7.15",
+ "aho-corasick",
  "memchr",
- "regex-syntax 0.6.22",
- "thread_local 1.1.3",
-]
-
-[[package]]
-name = "regex-syntax"
-version = "0.5.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7d707a4fa2637f2dca2ef9fd02225ec7661fe01a53623c1e6515b6916511f7a7"
-dependencies = [
- "ucd-util",
+ "regex-syntax",
+ "thread_local",
 ]
 
 [[package]]
@@ -1017,15 +986,6 @@ dependencies = [
 
 [[package]]
 name = "thread_local"
-version = "0.3.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c6b53e329000edc2b34dbe8545fd20e55a333362d0a321909685a19bd28c3f1b"
-dependencies = [
- "lazy_static",
-]
-
-[[package]]
-name = "thread_local"
 version = "1.1.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8018d24e04c95ac8790716a5987d0fec4f8b27249ffa0f7d33f1369bdfb88cbd"
@@ -1039,7 +999,7 @@ version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4ebb4107c167a4087349fcf08aea4debc358fe69d60fe1df991781842cfe98a3"
 dependencies = [
- "log 0.4.14",
+ "log",
  "tokio",
 ]
 
@@ -1083,12 +1043,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "ucd-util"
-version = "0.1.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c85f514e095d348c279b1e5cd76795082cf15bd59b93207832abe0b1d8fed236"
-
-[[package]]
 name = "unicode-xid"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1103,12 +1057,6 @@ dependencies = [
  "cfg-if 0.1.10",
  "libc",
 ]
-
-[[package]]
-name = "utf8-ranges"
-version = "1.0.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b4ae116fef2b7fea257ed6440d3cfcff7f190865f170cdad00bb6465bf18ecba"
 
 [[package]]
 name = "uuid"

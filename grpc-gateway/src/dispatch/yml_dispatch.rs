@@ -25,14 +25,16 @@ pub enum SSlAuthType{
 #[derive(Debug, PartialEq, Serialize, Deserialize,Clone)]
 pub struct DispatchOption{
     pub envs:HashMap<String,String>,
-    pub load_balance: Option<LoadBalanceType>
+    pub load_balance: Option<LoadBalanceType>,
+    pub log_env_type:Option<String>
 }
 
 impl Default for DispatchOption{
     fn default() -> Self {
         return DispatchOption{
             envs:HashMap::new(),
-            load_balance:Some(LoadBalanceType::Default)
+            load_balance:Some(LoadBalanceType::Default),
+            log_env_type:Some("info".to_string()),
         }
     }
 }
@@ -262,7 +264,7 @@ fn test_yml_parse(){
            port: 50052
            auth: ssl
            auth_option:
-             pem_location: ./test.pem
+             auth_file: ./test.pem
              authorized: jump.qiuqiuhuiben.com  
        options:
            load_balance: Round

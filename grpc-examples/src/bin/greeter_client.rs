@@ -66,8 +66,6 @@ fn main() {
         .say_hello(grpc::RequestOptions::new(), req)
         .join_metadata_result();
 
-    println!("befor call");
-
     let (meta_data, reply, trail_meta) = executor::block_on(resp).expect("ok");
     println!("{:?}", reply.message);
 }

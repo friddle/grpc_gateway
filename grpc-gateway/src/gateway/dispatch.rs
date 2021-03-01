@@ -28,6 +28,9 @@ use crate::gateway::gateway_struct::struct_types::{ConnectInfo, IHttp2Node, IHtt
 use crate::gateway::gateway_utils::get_all_load_balances;
 use crate::common::headers::headers_500;
 
+
+use log::{debug,info,error};
+
 //另一个项目的多态是在定义的时候生成的。不管
 
 
@@ -79,6 +82,7 @@ impl<T: GateWayTypes> DispatchCore<T>
                 .collect();
         if dispatch.len() == 0
         {
+            error!("dispatch not one matched");
             return Err(crate::Error::GateWayError(String::from(format!("dispatch fit empty {}", path))));
         }
         return Ok(dispatch.first().expect("dispatch should not empty").clone());

@@ -1,6 +1,6 @@
 Grpc-GateWay
 ========
-[中文文档](./README_ZH.md)
+[中文文档](./README_ZH.md)  
 Grpc Gateway impelement for Rust.choose backend node by method and metadata
 And provider some function for gateway
 
@@ -87,5 +87,5 @@ TODO
 *.   Add LogInterceptor implement
 *.   Fix Bytes from 0.5 to 1.0
 *.   Add pressure test code
-*.   Add baklance implemention  
+*.   Add balance implemention  
 *.   Add Redis/Web System to Manage

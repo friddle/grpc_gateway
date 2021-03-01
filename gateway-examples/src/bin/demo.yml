@@ -14,7 +14,7 @@
      -
        name: round_chat
        methods:
-         - /round*
+         - /routeguide*
        nodes:
          -
            host: localhost

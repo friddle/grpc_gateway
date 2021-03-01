@@ -14,9 +14,9 @@ use proto_gen::helloworld_grpc::GreeterServer;
 pub mod proto_gen;
 pub mod route;
 
-pub const isClientTls: bool = false;
-pub const isServerTls: bool = false;
-pub const DEFAULT_CALL_PORT: u16 = 50053;
-pub const DEFAULT_LISTEN_GREET_PORT: u16 = 50052;
-pub const DEFAULT_LISTEN_ROUTE_PORT: u16 = 50053;
+pub const isClientTls: bool = true;
+pub const isServerTls: bool = true;
+pub const DEFAULT_CALL_PORT: u16 = 5001;
+pub const DEFAULT_LISTEN_GREET_PORT: u16 = 5002;
+pub const DEFAULT_LISTEN_ROUTE_PORT: u16 = 5003;
 pub const ROUTE_GUIDE_DB_PATH: &str = "testdata/route_guide_db.json";
