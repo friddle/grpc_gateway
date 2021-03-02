@@ -1,9 +1,9 @@
 TODO_NOW:
 ---------------------
-*.  Https测试确保通过,主要是JavaGrpc部分互相掉不通。需要查看Https部分源代码   
-*.  修改Dispatch中的 async部分。当node_pull失败的时候输出到outcome_node
+*.  Https测试确保通过,主要是Java-Grpc部分互相掉不通。需要查看Https部分源代码.进行复杂的debug   
 *.  完善相应的错误处理    
-*.  日志部分实现
+*.  实现基础的Random/和轮询的Balance/基于Weight的Balance(需要conf透传)->
+*.  日志部分实现  
 
 
 TODO:

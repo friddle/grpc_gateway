@@ -2,6 +2,8 @@ use tls_api::TlsConnector;
 use tls_api_stub;
 use std::sync::Arc;
 use uuid::Uuid;
+use std::any::Any;
+use std::collections::HashMap;
 
 /// Client 对象必须保存数据..生命周期也应该是全局的.不是配置的
 #[derive(Clone)]
@@ -11,6 +13,7 @@ pub struct NodeConf {
     pub host: String,
     pub port: Option<u16>,
     pub id: String,
+    pub envs: HashMap<String,String>
 }
 
 //好像tlb_api有问题
@@ -22,7 +25,8 @@ impl NodeConf {
             host: String::from(host),
             port: Some(port),
             authorized:None,
-            id:String::from(Uuid::new_v4().to_hyphenated().to_string())
+            id:String::from(Uuid::new_v4().to_hyphenated().to_string()),
+            envs:HashMap::new()
         }
     }
 
@@ -32,7 +36,8 @@ impl NodeConf {
             host:String::from(host),
             port:Some(port),
             authorized:Some(String::from(authorized)),
-            id:String::from(Uuid::new_v4().to_hyphenated().to_string())
+            id:String::from(Uuid::new_v4().to_hyphenated().to_string()),
+            envs:HashMap::new()
         }
     }
 

@@ -4,6 +4,7 @@ use serde::{Serialize, Deserialize};
 use crate::{Headers, Interceptor, Metadata};
 pub mod random;
 pub mod default;
+pub mod robin;
 
 #[derive(Hash, Eq, PartialEq, Debug, Clone, Serialize, Deserialize)]
 pub enum LoadBalanceType
@@ -12,7 +13,6 @@ pub enum LoadBalanceType
     Round,
     Robin,
     Weighted,
-    RoundRobin,
     Random,
     Hash,
     Lc,

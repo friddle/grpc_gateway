@@ -345,6 +345,7 @@ dependencies = [
  "log",
  "log-ndc",
  "log-ndc-env-logger",
+ "rand 0.8.3",
  "regex",
  "serde",
  "serde_yaml",
