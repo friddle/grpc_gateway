@@ -12,7 +12,9 @@ fn main()
         .filter(|a| a != "--file=")
         .nth(1)
         .map(|s| s.to_owned())
-        .unwrap_or_else(|| "./src/bin/demo_tls.yml".to_owned());
+        .unwrap_or_else(|| "./demo.yml".to_owned())
+        .replace(&"--file=","");
+    println!("demo file location:{}",&file_location);
     let file_location=String::from(file_location);
     let ymlStarter=DispatchYamlStarter::<HttpBisServer>::parse_from_file(&file_location).run();
     let server=ymlStarter.server.as_ref().expect("");
